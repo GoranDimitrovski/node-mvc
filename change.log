@@ -1,3 +1,6 @@
+0.2.1 Updated travis to use node 0.12.0
+Updated mongoose to >= 4.0.x
+
 0.2.0 Removed promise lib added native one
 Switched to minimum node 0.12.0 because v8 inline cache memory leak
 

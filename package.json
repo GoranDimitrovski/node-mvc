@@ -2,9 +2,9 @@
   "name": "mvcjs",
   "main": "./framework/di.js",
   "description": "Powerful lightweight mvc framework for nodejs",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "dependencies": {
-    "mongoose": "3.8.x",
+    "mongoose": "4.0.x",
     "swig": "1.4.x",
     "static-type-js": "0.3.x",
     "etag": "1.5.x",
