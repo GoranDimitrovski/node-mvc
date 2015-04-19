@@ -3,7 +3,6 @@ describe('core/request', function () {
     "use strict";
     var request,
         config = {},
-        Promise = di.load('promise'),
         logger = {
             info: function () {
 

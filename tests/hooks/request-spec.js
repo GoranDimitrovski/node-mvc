@@ -9,13 +9,13 @@ describe('hooks/request', function () {
             info: function () {
 
             },
-            error: function() {
+            error: function () {
 
             },
-            log: function() {
+            log: function () {
 
             },
-            warn: function() {
+            warn: function () {
 
             }
         };
@@ -33,14 +33,6 @@ describe('hooks/request', function () {
                     }
                     loadedNames.push(name);
                 }
-            },
-            "promise": function (callback) {
-                callback(function resolve(data) {
-                    _data = data;
-                }, function reject(data) {
-                    //console.log('reject', data);
-                    _data = data;
-                });
             }
         });
 
@@ -121,7 +113,7 @@ describe('hooks/request', function () {
     });
 
 
-    it('process', function () {
+    it('process', function (done) {
         reqInstance = new RequestHooks;
         var api = {
             parsedUrl: {
@@ -134,22 +126,59 @@ describe('hooks/request', function () {
             return 'HOOK';
         };
         reqInstance.set(regex, callback);
-        reqInstance.process(api);
-        expect(_data).toBe('HOOK');
-
-
-        api.parsedUrl.pathname = '/test';
-        reqInstance.process(api);
-        expect(_data).toBe(false);
-
-
-        api.parsedUrl.pathname = 1;
-
-        var message = tryCatch(function () {
-            return reqInstance.process(api);
+        reqInstance.process(api).then(function (data) {
+            expect(data).toBe('HOOK');
+            done();
+        }).catch(function (error) {
+            fail(error);
+            done();
         });
+    });
 
-        expect(message.indexOf('Hook error') > -1).toBe(true);
+    it('process 2', function (done) {
+        reqInstance = new RequestHooks;
+        var api = {
+            parsedUrl: {
+                pathname: '/test'
+            }
+        };
+        var regex = /^\/home/;
+
+        var callback = function () {
+            return 'HOOK';
+        };
+        reqInstance.set(regex, callback);
+        reqInstance.process(api).then(function (data) {
+            expect(data).toBe(false);
+            done();
+        }).catch(function (error) {
+            fail(error);
+            done();
+        });
+    });
+
+
+
+    it('process error', function (done) {
+        reqInstance = new RequestHooks;
+        var api = {
+            parsedUrl: {
+                pathname: 1
+            }
+        };
+        var regex = /^\/home/;
+
+        var callback = function () {
+            return 'HOOK';
+        };
+        reqInstance.set(regex, callback);
+        reqInstance.process(api).then(null, function (data) {
+            expect(data.indexOf('Hook error') > -1).toBe(true);
+            done();
+        }).catch(function (error) {
+            fail(error);
+            done();
+        });
     });
 
 

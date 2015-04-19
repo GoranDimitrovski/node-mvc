@@ -47,7 +47,6 @@ describe('core/router', function () {
             typejs: Type,
             core: core,
             error: di.load('error'),
-            promise: di.load('promise'),
 
             "core/routeRule": RouteRule,
             "interface/routeRule": RouteRuleInterface,

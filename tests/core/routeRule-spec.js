@@ -36,7 +36,6 @@ describe('core/routeRule', function () {
             typejs: Type,
             core: core,
             error: di.load('error'),
-            promise: di.load('promise'),
             "interface/routeRule": routeRuleInterface,
             "core/component": componentMock
         };

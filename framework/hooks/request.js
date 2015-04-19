@@ -5,7 +5,6 @@ var di = require('../di'),
     RequestHooksInterface = di.load('interface/requestHooks'),
     component = di.load('core/component'),
     logger = component.get('core/logger'),
-    Promise = di.load('promise'),
     RequestHooks;
 
 

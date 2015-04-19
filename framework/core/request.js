@@ -12,7 +12,6 @@ var di = require('../di'),
     zlib = di.load('zlib'),
     core = di.load('core'),
     error = di.load('error'),
-    Promise = di.load('promise'),
     Request;
 
 
